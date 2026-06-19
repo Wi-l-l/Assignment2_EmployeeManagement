@@ -102,7 +102,18 @@ func addPartTimeEmployee()
 //TODO: Display all employees
 func displayEmployees()
 {
-    //
+    if employees.isEmpty
+    {
+        print("\nThere are currently no employees in the system. Please add employees first.")
+    }
+    else
+    {
+        print("\n--|Current Employees|--")
+        for employee in employees.values{
+            print(employee.displayDetails())
+        }
+    }
+    
 }
 
 //TODO: Remove an employee by ID
