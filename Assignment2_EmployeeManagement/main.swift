@@ -8,6 +8,8 @@
 import Foundation
 var employees: [Int:Employee] = [:]
 var toContinue = true
+
+//Continue running the program until the user chooses to exit
 while toContinue
 {
     menu()
@@ -15,6 +17,16 @@ while toContinue
     
     switch input
     {
+    case "1":
+        addFullTimeEmployee()
+    case "2":
+        addPartTimeEmployee()
+    case "3":
+        displayEmployees()
+    case "4":
+        removeEmployee()
+    case "5":
+        findEmployee()
     case "6":
         print("Exiting the program...")
         toContinue = false
@@ -35,4 +47,36 @@ func menu()
         + "\n5. Search for an employee by ID"
         + "\n6. Exit"
         + "\n\nEnter your option:")
+}
+
+//TODO: Add a full-time employee
+//TODO: Implement add full-time employee validation
+func addFullTimeEmployee()
+{
+    //
+}
+
+//TODO: Add a part-time employee
+//TODO: Implement add part-time employee validation
+func addPartTimeEmployee()
+{
+    //
+}
+
+//TODO: Display all employees
+func displayEmployees()
+{
+    //
+}
+
+//TODO: Remove an employee by ID
+func removeEmployee()
+{
+    //
+}
+
+//TODO: Search for an employee by ID
+func findEmployee()
+{
+    //
 }
