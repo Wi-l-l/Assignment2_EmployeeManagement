@@ -21,6 +21,7 @@ while toContinue
         print("\nAdding a Full-Time Employee...")
         addFullTimeEmployee()
     case "2":
+        print("\nAdding a Part-Time Employee...")
         addPartTimeEmployee()
     case "3":
         displayEmployees()
@@ -50,8 +51,7 @@ func menu()
         + "\n\nEnter your option:")
 }
 
-//Add a full-time employee
-//TODO: Implement add full-time employee validation
+///Add a full-time employee to the employees dictionary
 func addFullTimeEmployee()
 {
     var newFullTimeEmployee: Employee
@@ -103,8 +103,7 @@ func addFullTimeEmployee()
     }
 }
 
-//TODO: Add a part-time employee
-//TODO: Implement add part-time employee validation
+/// Add a part-time employee to the employees dictionary
 func addPartTimeEmployee()
 {
     var newPartTimeEmp: Employee
@@ -163,7 +162,7 @@ func addPartTimeEmployee()
     }
 }
 
-//TODO: Display all employees
+///Display all current employees in the employees dictionary by ascending ID
 func displayEmployees()
 {
     if employees.isEmpty
@@ -172,8 +171,11 @@ func displayEmployees()
     }
     else
     {
+        let sortedEmployees = employees.sorted(by: {$0.key < $1.key}).map({$0.value})
+        
         print("\n--|Current Employees|--")
-        for employee in employees.values{
+        for employee in sortedEmployees
+        {
             print(employee.displayDetails())
         }
     }
@@ -183,13 +185,48 @@ func displayEmployees()
 //TODO: Remove an employee by ID
 func removeEmployee()
 {
-    //
+    if employees.isEmpty
+    {
+        print("There are currently no employees in the system to remove.")
+    }
+    else
+    {
+        print("Enter employee ID:")
+        var removeIDInput = readLine()!
+        
+        while (!(employees.keys.contains(Int(removeIDInput)!)) || (removeIDInput.isEmpty) || (removeIDInput.trimmingCharacters(in: .whitespaces).isEmpty)) && !(Int(removeIDInput)! <= 0)
+        {
+            if (removeIDInput.isEmpty) || (removeIDInput.trimmingCharacters(in: .whitespaces).isEmpty)
+            {
+                print("There cannot be a blank ID. Enter a non-blank employee ID here. Or type a non-positive number to return to the main menu:")
+                removeIDInput = readLine()!
+            }
+            else if !(employees.keys.contains(Int(removeIDInput)!)) && (Int(removeIDInput)! > 0)
+            {
+                print("There is no employee with ID: \(removeIDInput). Enter a different ID. Or type a non-positive number to return to the main menu:")
+                removeIDInput = readLine()!
+            }
+        }
+        var idToRemove = Int(removeIDInput)!
+        
+        if idToRemove >= 0
+        {
+            print("\nRemoving employee with ID: \(idToRemove)")
+            employees.removeValue(forKey: idToRemove)
+            print("Employee successfully removed...")
+        }
+        else
+        {
+            print("Returning to main menu...")
+        }
+    }
 }
 
 //TODO: Search for an employee by ID
 func findEmployee()
 {
-    //
+    print("Enter employee ID:")
+    var findIDInput = Int(readLine()!)!
 }
 
 
