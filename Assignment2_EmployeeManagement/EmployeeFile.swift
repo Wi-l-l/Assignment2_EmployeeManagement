@@ -22,13 +22,15 @@ class Employee
         self.name = name
     }
     
+    ///Display employee details in a readable format
     func displayDetails() -> String
     {
         return "ID: \(id) | Name: \(name) | Salary: \(salary)"
     }
 }
 
-class FullTimEmployee : Employee
+///Represents a Full-Time Employee
+class FullTimEmployee : Employee, Taxable
 {
     var monthlySalary: Double
     
@@ -43,9 +45,15 @@ class FullTimEmployee : Employee
         let annualSalary = 12 * monthlySalary
         return annualSalary
     }
+    
+    ///Calculate income tax of a full-time employee
+    func calculateTax() -> Double {
+        return 0.15 * salary
+    }
 }
 
-class PartTimeEmployee : Employee
+///Represents a Part-Time Employee
+class PartTimeEmployee : Employee, Taxable
 {
     var hourlyRate: Double
     var hoursWorked: Int
@@ -61,9 +69,18 @@ class PartTimeEmployee : Employee
         let annualSalary = hourlyRate * Double(hoursWorked) * 56
         return annualSalary
     }
+    
+    ///Calculate income tax ofa a part-time employee
+    func calculateTax() -> Double {
+        return 0.1 * salary
+    }
 }
 
-
+///Protocol to calculate income tax, based on the employee's salary
+protocol Taxable
+{
+    func calculateTax() -> Double
+}
 
 
 
