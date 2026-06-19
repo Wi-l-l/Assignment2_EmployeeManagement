@@ -57,16 +57,50 @@ func addFullTimeEmployee()
     var newFullTimeEmployee: Employee
     
     print("\nEnter Employee ID:")
-    var ftEmpID = Int(readLine()!)!
+    var ftEmpID = readLine()!
     
-    print("\nEnter Employee Name:")
-    var ftEmpName = readLine()!
+    //Continue checking if the employee
+    while (ftEmpID.isEmpty) || (ftEmpID.trimmingCharacters(in: .whitespaces).isEmpty) || (employees.keys.contains(Int(ftEmpID)!))
+    {
+        if (ftEmpID.isEmpty) || (ftEmpID.trimmingCharacters(in: .whitespaces).isEmpty)
+        {
+            print("\nThe employee ID cannot be blank. Enter the employee ID here. Or enter a non-positive number to exit out: ")
+            ftEmpID = readLine()!
+        }
+        else if employees.keys.contains(Int(ftEmpID)!)
+        {
+            print("ID exists. Put a new ID here:")
+            ftEmpID = readLine()!
+        }
+    }
+    let fullTimeID = Int(ftEmpID)!
     
-    print("\nEnter Employee Monthly Salary:")
-    var ftEmpSalary = Double(readLine()!)!
-    
-    newFullTimeEmployee = FullTimEmployee(id: ftEmpID, name: ftEmpName, monthlySalary: ftEmpSalary)
-    employees[ftEmpID] = newFullTimeEmployee
+    if fullTimeID > 0
+    {
+        print("\nEnter Employee Name:")
+        var ftEmpName = readLine()!
+        while (ftEmpName.isEmpty) || (ftEmpName.trimmingCharacters(in: .whitespaces).isEmpty)
+        {
+            print("Employee name cannot be empty. Enter the employee's name:")
+            ftEmpName = readLine()!
+        }
+        
+        print("\nEnter Employee Monthly Salary:")
+        var ftEmpSalary = Double(readLine()!)!
+        while (ftEmpSalary <= 0) || (String(ftEmpSalary).isEmpty)
+        {
+            print("The employee must have a monthly salary greater than $0. Enter the salary here:")
+            ftEmpSalary = Double(readLine()!)!
+        }
+        
+        newFullTimeEmployee = FullTimEmployee(id: fullTimeID, name: ftEmpName, monthlySalary: ftEmpSalary)
+        employees[fullTimeID] = newFullTimeEmployee
+    }
+    else
+    {
+        print("\nReturning to main menu...")
+        return
+    }
     
     //for (id, employee) in employees{
     //    print(employee.displayDetails())
@@ -128,4 +162,5 @@ func findEmployee()
     //
 }
 
+///Check if a given employee ID already belongs to an existing employee in the employees dictionary
 
