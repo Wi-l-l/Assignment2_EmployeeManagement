@@ -7,8 +7,23 @@
 
 import Foundation
 var employees: [Int:Employee] = [:]
-menu()
+var toContinue = true
+while toContinue
+{
+    menu()
+    let input = readLine()!
+    
+    switch input
+    {
+    case "6":
+        print("Exiting the program...")
+        toContinue = false
+    default:
+        print("\nInvalid choice. Please select a valid option from the menu")
+    }
+}
 
+///Main menu of the employees management console
 func menu()
 {
     print("\n=== Employee Management System ==="
