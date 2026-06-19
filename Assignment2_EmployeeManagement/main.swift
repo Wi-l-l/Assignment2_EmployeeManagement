@@ -182,7 +182,7 @@ func displayEmployees()
     
 }
 
-//TODO: Remove an employee by ID
+///Remove an employee from the employees dictionary by ID
 func removeEmployee()
 {
     if employees.isEmpty
@@ -207,7 +207,7 @@ func removeEmployee()
                 removeIDInput = readLine()!
             }
         }
-        var idToRemove = Int(removeIDInput)!
+        let idToRemove = Int(removeIDInput)!
         
         if idToRemove >= 0
         {
@@ -225,8 +225,41 @@ func removeEmployee()
 //TODO: Search for an employee by ID
 func findEmployee()
 {
-    print("Enter employee ID:")
-    var findIDInput = Int(readLine()!)!
+    if employees.isEmpty
+    {
+        print("There are currently no employees in the system to find.")
+    }
+    else
+    {
+        print("Enter employee ID:")
+        var findIDInput = readLine()!
+        
+        while (!(employees.keys.contains(Int(findIDInput)!)) || (findIDInput.isEmpty) || (findIDInput.trimmingCharacters(in: .whitespaces).isEmpty)) && !(Int(findIDInput)! <= 0)
+        {
+            if (findIDInput.isEmpty) || (findIDInput.trimmingCharacters(in: .whitespaces).isEmpty)
+            {
+                print("There cannot be a blank ID. Enter a non-blank employee ID here. Or type a non-positive number to return to the main menu:")
+                findIDInput = readLine()!
+            }
+            else if !(employees.keys.contains(Int(findIDInput)!)) && (Int(findIDInput)! > 0)
+            {
+                print("There is no employee with ID: \(findIDInput). Enter a different ID. Or type a non-positive number to return to the main menu:")
+                findIDInput = readLine()!
+            }
+        }
+        let idToFind = Int(findIDInput)!
+        
+        if idToFind >= 0
+        {
+            print("\nLocating employee with ID: \(idToFind)")
+            
+            print(employees[idToFind]!.displayDetails())
+        }
+        else
+        {
+            print("Returning to main menu...")
+        }
+    }
 }
 
 
