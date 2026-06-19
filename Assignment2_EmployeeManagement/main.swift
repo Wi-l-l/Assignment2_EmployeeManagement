@@ -69,7 +69,7 @@ func addFullTimeEmployee()
         }
         else if employees.keys.contains(Int(ftEmpID)!)
         {
-            print("ID exists. Put a new ID here:")
+            print("\nThis ID already belongs to an existing employee. Put a new ID here:")
             ftEmpID = readLine()!
         }
     }
@@ -101,10 +101,6 @@ func addFullTimeEmployee()
         print("\nReturning to main menu...")
         return
     }
-    
-    //for (id, employee) in employees{
-    //    print(employee.displayDetails())
-    //}
 }
 
 //TODO: Add a part-time employee
@@ -114,23 +110,57 @@ func addPartTimeEmployee()
     var newPartTimeEmp: Employee
     
     print("\nEnter Employee ID:")
-    var ptEmpID = Int(readLine()!)!
+    var ptEmpID = readLine()!
     
-    print("\nEnter Employee Name:")
-    var ptEmpName = readLine()!
+    while (ptEmpID.isEmpty) || (ptEmpID.trimmingCharacters(in: .whitespaces).isEmpty) || (employees.keys.contains(Int(ptEmpID)!))
+    {
+        if (ptEmpID.isEmpty) || (ptEmpID.trimmingCharacters(in: .whitespaces).isEmpty)
+        {
+            print("\nThe employee ID cannot be blank. Enter the employee ID here. Or enter a non-positive number to exit out: ")
+            ptEmpID = readLine()!
+        }
+        else if employees.keys.contains(Int(ptEmpID)!)
+        {
+            print("\nThis ID already belongs to an existing employee. Put a new ID here:")
+            ptEmpID = readLine()!
+        }
+    }
+    let partTimeID = Int(ptEmpID)!
     
-    print("\nEnter Employee Hourly Rate:")
-    var ptEmpHourlyRate = Double(readLine()!)!
-    
-    print("\nEnter Employee Hours Worked:")
-    var ptEmpWorkHours = Int(readLine()!)!
-    
-    newPartTimeEmp = PartTimeEmployee(id: ptEmpID, name: ptEmpName, hourlyRate: ptEmpHourlyRate, hoursWorked: ptEmpWorkHours)
-    employees[ptEmpID] = newPartTimeEmp
-    
-    //for (id, employee) in employees{
-    //    print(employee.displayDetails())
-    //}
+    if partTimeID > 0
+    {
+        print("\nEnter Employee Name:")
+        var ptEmpName = readLine()!
+        while (ptEmpName.isEmpty) || (ptEmpName.trimmingCharacters(in: .whitespaces).isEmpty)
+        {
+            print("The employee name cannot be empty. Enter the employee's name here:")
+            ptEmpName = readLine()!
+        }
+        
+        print("\nEnter Employee Hourly Rate:")
+        var ptEmpHourlyRate = Double(readLine()!)!
+        while ptEmpHourlyRate <= 0
+        {
+            print("The employee must have an hourly rate greater than 0. Enter a new hourly rate here:")
+            ptEmpHourlyRate = Double(readLine()!)!
+        }
+        
+        print("\nEnter Employee Hours Worked:")
+        var ptEmpWorkHours = Int(readLine()!)!
+        while ptEmpWorkHours <= 0
+        {
+            print("\nThe employee must work more than 0 hours. \nEnter the hours worked:")
+            ptEmpWorkHours = Int(readLine()!)!
+        }
+        
+        newPartTimeEmp = PartTimeEmployee(id: partTimeID, name: ptEmpName, hourlyRate: ptEmpHourlyRate, hoursWorked: ptEmpWorkHours)
+        employees[partTimeID] = newPartTimeEmp
+    }
+    else
+    {
+        print("\nReturning to main menu...")
+        return
+    }
 }
 
 //TODO: Display all employees
@@ -162,5 +192,4 @@ func findEmployee()
     //
 }
 
-///Check if a given employee ID already belongs to an existing employee in the employees dictionary
 
