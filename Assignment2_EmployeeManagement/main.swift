@@ -3,6 +3,7 @@
 //  Assignment2_EmployeeManagement
 //
 //  Created by William Liang on 2026-06-19.
+//  ID: 991 830 711
 //
 
 import Foundation
@@ -89,7 +90,7 @@ func addFullTimeEmployee()
         var ftEmpName = readLine()!
         while (ftEmpName.isEmpty) || (ftEmpName.trimmingCharacters(in: .whitespaces).isEmpty)
         {
-            print("Employee name cannot be empty. Enter the employee's name:")
+            print("\nEmployee name cannot be empty. Enter the employee's name:")
             ftEmpName = readLine()!
         }
         
@@ -97,7 +98,7 @@ func addFullTimeEmployee()
         var ftEmpSalary = Double(readLine()!)!
         while (ftEmpSalary <= 0) || (String(ftEmpSalary).isEmpty)
         {
-            print("The employee must have a monthly salary greater than $0. Enter the salary here:")
+            print("\nThe employee must have a monthly salary greater than $0. Enter the salary here:")
             ftEmpSalary = Double(readLine()!)!
         }
         
@@ -148,7 +149,7 @@ func addPartTimeEmployee()
         var ptEmpName = readLine()!
         while (ptEmpName.isEmpty) || (ptEmpName.trimmingCharacters(in: .whitespaces).isEmpty)
         {
-            print("The employee name cannot be empty. Enter the employee's name here:")
+            print("\nThe employee name cannot be empty. Enter the employee's name here:")
             ptEmpName = readLine()!
         }
         
@@ -156,7 +157,7 @@ func addPartTimeEmployee()
         var ptEmpHourlyRate = Double(readLine()!)!
         while ptEmpHourlyRate <= 0
         {
-            print("The employee must have an hourly rate greater than 0. Enter a new hourly rate here:")
+            print("\nThe employee must have an hourly rate greater than 0. Enter a new hourly rate here:")
             ptEmpHourlyRate = Double(readLine()!)!
         }
         
@@ -208,13 +209,13 @@ func removeEmployee()
     //Warn the user that there are no employees to remove
     if employees.isEmpty
     {
-        print("There are currently no employees in the system to remove.")
+        print("\nThere are currently no employees in the system to remove.")
     }
     
     //Proceed, if there exist employees
     else
     {
-        print("Enter employee ID:")
+        print("\nEnter employee ID:")
         var removeIDInput = readLine()!
         
         //Handle ID input validation cases
@@ -223,14 +224,14 @@ func removeEmployee()
             //Check if the employee ID input is left blank
             if (removeIDInput.isEmpty) || (removeIDInput.trimmingCharacters(in: .whitespaces).isEmpty)
             {
-                print("There cannot be a blank ID. Enter a non-blank employee ID here. Or type a non-positive number to return to the main menu:")
+                print("\nThere cannot be a blank ID. Enter a non-blank employee ID here. Or type a non-positive number to return to the main menu:")
                 removeIDInput = readLine()!
             }
             
             //Check if the employee ID does not belong to an existing employee
             else if !(employees.keys.contains(Int(removeIDInput)!)) && (Int(removeIDInput)! > 0)
             {
-                print("There is no employee with ID: \(removeIDInput). Enter a different ID. Or type a non-positive number to return to the main menu:")
+                print("\nThere is no employee with ID: \(removeIDInput). Enter a different ID. Or type a non-positive number to return to the main menu:")
                 removeIDInput = readLine()!
             }
         }
@@ -249,7 +250,7 @@ func removeEmployee()
         //Return to main menu if the ID input is a non-positive integer
         else
         {
-            print("Returning to main menu...")
+            print("\nReturning to main menu...")
         }
     }
 }
@@ -260,13 +261,13 @@ func findEmployee()
     //Warn the user that there are no employees to find
     if employees.isEmpty
     {
-        print("There are currently no employees in the system to find.")
+        print("\nThere are currently no employees in the system to find.")
     }
     
     //Proceed, if there exist employees
     else
     {
-        print("Enter employee ID:")
+        print("\nEnter employee ID:")
         var findIDInput = readLine()!
         
         //Handle ID input validation cases
@@ -275,14 +276,14 @@ func findEmployee()
             //Check if the employee ID input is left blank
             if (findIDInput.isEmpty) || (findIDInput.trimmingCharacters(in: .whitespaces).isEmpty)
             {
-                print("There cannot be a blank ID. Enter a non-blank employee ID here. Or type a non-positive number to return to the main menu:")
+                print("\nThere cannot be a blank ID. Enter a non-blank employee ID here. Or type a non-positive number to return to the main menu:")
                 findIDInput = readLine()!
             }
             
             //Check if the employee ID does not belong to an existing employee
             else if !(employees.keys.contains(Int(findIDInput)!)) && (Int(findIDInput)! > 0)
             {
-                print("There is no employee with ID: \(findIDInput). Enter a different ID. Or type a non-positive number to return to the main menu:")
+                print("\nThere is no employee with ID: \(findIDInput). Enter a different ID. Or type a non-positive number to return to the main menu:")
                 findIDInput = readLine()!
             }
         }
@@ -294,7 +295,6 @@ func findEmployee()
         if idToFind >= 0
         {
             print("\nLocating employee with ID: \(idToFind)")
-            
             print(employees[idToFind]!.displayDetails())
         }
         
