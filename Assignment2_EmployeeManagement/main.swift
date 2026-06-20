@@ -24,10 +24,13 @@ while toContinue
         print("\nAdding a Part-Time Employee...")
         addPartTimeEmployee()
     case "3":
+        print("\nDisplaying Current Employees...")
         displayEmployees()
     case "4":
+        print("\nRemoving an Employee...")
         removeEmployee()
     case "5":
+        print("\nFinding an Employee...")
         findEmployee()
     case "6":
         print("Exiting the program...")
@@ -59,22 +62,27 @@ func addFullTimeEmployee()
     print("\nEnter Employee ID:")
     var ftEmpID = readLine()!
     
-    //Continue checking if the employee
+    //Handle employee ID input verification
     while (ftEmpID.isEmpty) || (ftEmpID.trimmingCharacters(in: .whitespaces).isEmpty) || (employees.keys.contains(Int(ftEmpID)!))
     {
+        //Check if the employee ID input was left blank
         if (ftEmpID.isEmpty) || (ftEmpID.trimmingCharacters(in: .whitespaces).isEmpty)
         {
             print("\nThe employee ID cannot be blank. Enter the employee ID here. Or enter a non-positive number to exit out: ")
             ftEmpID = readLine()!
         }
+        
+        //Check if the employee ID already belongs to an existing employee
         else if employees.keys.contains(Int(ftEmpID)!)
         {
             print("\nThis ID already belongs to an existing employee. Put a new ID here:")
             ftEmpID = readLine()!
         }
     }
+    //Convert the validated string ID to an integer
     let fullTimeID = Int(ftEmpID)!
     
+    //Proceed with adding other employee details, if the ID is a positive integer
     if fullTimeID > 0
     {
         print("\nEnter Employee Name:")
@@ -96,6 +104,8 @@ func addFullTimeEmployee()
         newFullTimeEmployee = FullTimEmployee(id: fullTimeID, name: ftEmpName, monthlySalary: ftEmpSalary)
         employees[fullTimeID] = newFullTimeEmployee
     }
+    
+    //Return to main menu if the ID input is a non-positive integer
     else
     {
         print("\nReturning to main menu...")
@@ -111,21 +121,27 @@ func addPartTimeEmployee()
     print("\nEnter Employee ID:")
     var ptEmpID = readLine()!
     
+    //Handle employee ID input verification
     while (ptEmpID.isEmpty) || (ptEmpID.trimmingCharacters(in: .whitespaces).isEmpty) || (employees.keys.contains(Int(ptEmpID)!))
     {
+        //Check if the employee ID input was left blank
         if (ptEmpID.isEmpty) || (ptEmpID.trimmingCharacters(in: .whitespaces).isEmpty)
         {
             print("\nThe employee ID cannot be blank. Enter the employee ID here. Or enter a non-positive number to exit out: ")
             ptEmpID = readLine()!
         }
+        
+        //Check if the employee ID already belongs to an existing employee
         else if employees.keys.contains(Int(ptEmpID)!)
         {
             print("\nThis ID already belongs to an existing employee. Put a new ID here:")
             ptEmpID = readLine()!
         }
     }
+    //Convert the validated string ID to an integer
     let partTimeID = Int(ptEmpID)!
     
+    //Proceed with adding other employee details, if the ID is a positive integer
     if partTimeID > 0
     {
         print("\nEnter Employee Name:")
@@ -155,6 +171,8 @@ func addPartTimeEmployee()
         newPartTimeEmp = PartTimeEmployee(id: partTimeID, name: ptEmpName, hourlyRate: ptEmpHourlyRate, hoursWorked: ptEmpWorkHours)
         employees[partTimeID] = newPartTimeEmp
     }
+    
+    //Return to main menu if the ID input is a non-positive integer
     else
     {
         print("\nReturning to main menu...")
@@ -165,10 +183,12 @@ func addPartTimeEmployee()
 ///Display all current employees in the employees dictionary by ascending ID
 func displayEmployees()
 {
+    //Tell the user there are no employees in the system
     if employees.isEmpty
     {
         print("\nThere are currently no employees in the system. Please add employees first.")
     }
+    //Display employees by employee ID ascending
     else
     {
         let sortedEmployees = employees.sorted(by: {$0.key < $1.key}).map({$0.value})
@@ -185,36 +205,48 @@ func displayEmployees()
 ///Remove an employee from the employees dictionary by ID
 func removeEmployee()
 {
+    //Warn the user that there are no employees to remove
     if employees.isEmpty
     {
         print("There are currently no employees in the system to remove.")
     }
+    
+    //Proceed, if there exist employees
     else
     {
         print("Enter employee ID:")
         var removeIDInput = readLine()!
         
+        //Handle ID input validation cases
         while (!(employees.keys.contains(Int(removeIDInput)!)) || (removeIDInput.isEmpty) || (removeIDInput.trimmingCharacters(in: .whitespaces).isEmpty)) && !(Int(removeIDInput)! <= 0)
         {
+            //Check if the employee ID input is left blank
             if (removeIDInput.isEmpty) || (removeIDInput.trimmingCharacters(in: .whitespaces).isEmpty)
             {
                 print("There cannot be a blank ID. Enter a non-blank employee ID here. Or type a non-positive number to return to the main menu:")
                 removeIDInput = readLine()!
             }
+            
+            //Check if the employee ID does not belong to an existing employee
             else if !(employees.keys.contains(Int(removeIDInput)!)) && (Int(removeIDInput)! > 0)
             {
                 print("There is no employee with ID: \(removeIDInput). Enter a different ID. Or type a non-positive number to return to the main menu:")
                 removeIDInput = readLine()!
             }
         }
+        
+        //Convert the validated string ID to an integer
         let idToRemove = Int(removeIDInput)!
         
+        //Remove employee of the validated ID
         if idToRemove >= 0
         {
             print("\nRemoving employee with ID: \(idToRemove)")
             employees.removeValue(forKey: idToRemove)
             print("Employee successfully removed...")
         }
+        
+        //Return to main menu if the ID input is a non-positive integer
         else
         {
             print("Returning to main menu...")
@@ -222,44 +254,54 @@ func removeEmployee()
     }
 }
 
-//TODO: Search for an employee by ID
+///Search for a specific employee by ID
 func findEmployee()
 {
+    //Warn the user that there are no employees to find
     if employees.isEmpty
     {
         print("There are currently no employees in the system to find.")
     }
+    
+    //Proceed, if there exist employees
     else
     {
         print("Enter employee ID:")
         var findIDInput = readLine()!
         
+        //Handle ID input validation cases
         while (!(employees.keys.contains(Int(findIDInput)!)) || (findIDInput.isEmpty) || (findIDInput.trimmingCharacters(in: .whitespaces).isEmpty)) && !(Int(findIDInput)! <= 0)
         {
+            //Check if the employee ID input is left blank
             if (findIDInput.isEmpty) || (findIDInput.trimmingCharacters(in: .whitespaces).isEmpty)
             {
                 print("There cannot be a blank ID. Enter a non-blank employee ID here. Or type a non-positive number to return to the main menu:")
                 findIDInput = readLine()!
             }
+            
+            //Check if the employee ID does not belong to an existing employee
             else if !(employees.keys.contains(Int(findIDInput)!)) && (Int(findIDInput)! > 0)
             {
                 print("There is no employee with ID: \(findIDInput). Enter a different ID. Or type a non-positive number to return to the main menu:")
                 findIDInput = readLine()!
             }
         }
+        
+        //Convert the validated string ID to an integer
         let idToFind = Int(findIDInput)!
         
+        //Find and display the employee with such ID
         if idToFind >= 0
         {
             print("\nLocating employee with ID: \(idToFind)")
             
             print(employees[idToFind]!.displayDetails())
         }
+        
+        //Return to main menu if the ID input is a non-positive integer
         else
         {
             print("Returning to main menu...")
         }
     }
 }
-
-
