@@ -271,7 +271,7 @@ func findEmployee()
         var findIDInput = readLine()!
         
         //Handle ID input validation cases
-        while (!(employees.keys.contains(Int(findIDInput)!)) || (findIDInput.isEmpty) || (findIDInput.trimmingCharacters(in: .whitespaces).isEmpty)) && !(Int(findIDInput)! <= 0)
+        while !(employees.keys.contains(Int(findIDInput)!) || (findIDInput.isEmpty) || (findIDInput.trimmingCharacters(in: .whitespaces).isEmpty)) && !(Int(findIDInput)! <= 0)
         {
             //Check if the employee ID input is left blank
             if (findIDInput.isEmpty) || (findIDInput.trimmingCharacters(in: .whitespaces).isEmpty)
