@@ -46,6 +46,10 @@ class FullTimEmployee : Employee, Taxable
         return annualSalary
     }
     
+    override func displayDetails() -> String {
+        return "ID: \(id) | Name: \(name) | Annual Salary: \(String(format: "%.2f", salary)) | Tax: \(String(format: "%.2f", calculateTax()))"
+    }
+    
     ///Calculate income tax of a full-time employee
     func calculateTax() -> Double {
         return 0.15 * salary
@@ -68,6 +72,10 @@ class PartTimeEmployee : Employee, Taxable
     {
         let annualSalary = hourlyRate * Double(hoursWorked) * 56
         return annualSalary
+    }
+    
+    override func displayDetails() -> String {
+        return "ID: \(id) | Name: \(name) | Annual Salary: \(String(format: "%.2f", salary)) | Tax: \(String(format: "%.2f", calculateTax()))"
     }
     
     ///Calculate income tax ofa a part-time employee
